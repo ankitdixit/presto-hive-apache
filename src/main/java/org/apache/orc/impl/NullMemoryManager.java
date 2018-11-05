@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.hadoop.hive.ql.io.orc;
+package org.apache.orc.impl;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -29,23 +29,23 @@ public class NullMemoryManager
     }
 
     @Override
-    void addWriter(Path path, long requestedAllocation, Callback callback) {}
+    public void addWriter(Path path, long requestedAllocation, Callback callback) {}
 
     @Override
-    void removeWriter(Path path) {}
+    public void removeWriter(Path path) {}
 
     @Override
-    long getTotalMemoryPool()
+    public long getTotalMemoryPool()
     {
         return 0;
     }
 
     @Override
-    double getAllocationScale()
+    public double getAllocationScale()
     {
         return 0;
     }
 
     @Override
-    void addedRow() {}
+    public void addedRow(int rows) {}
 }

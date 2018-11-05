@@ -11,9 +11,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.hadoop.hive.ql.io.orc;
+package org.apache.orc;
 
 import org.apache.hadoop.conf.Configuration;
+
+import java.util.Properties;
 
 /**
  * Allow access to certain package private methods of WriterOptions,
@@ -22,9 +24,9 @@ import org.apache.hadoop.conf.Configuration;
 public class OrcWriterOptions
         extends OrcFile.WriterOptions
 {
-    public OrcWriterOptions(Configuration conf)
+    public OrcWriterOptions(Properties tableProperties, Configuration conf)
     {
-        super(conf);
+        super(tableProperties, conf);
     }
 
     @Override

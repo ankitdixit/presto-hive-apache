@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.hive.hcatalog.data;
+package org.apache.hadoop.hive.serde2;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -38,11 +38,6 @@ import org.apache.hadoop.hive.common.type.HiveDecimal;
 import org.apache.hadoop.hive.common.type.HiveVarchar;
 import org.apache.hadoop.hive.conf.HiveConf;
 import org.apache.hadoop.hive.serde.serdeConstants;
-import org.apache.hadoop.hive.serde2.SerDe;
-import org.apache.hadoop.hive.serde2.SerDeException;
-import org.apache.hadoop.hive.serde2.SerDeSpec;
-import org.apache.hadoop.hive.serde2.SerDeStats;
-import org.apache.hadoop.hive.serde2.SerDeUtils;
 import org.apache.hadoop.hive.serde2.objectinspector.ListObjectInspector;
 import org.apache.hadoop.hive.serde2.objectinspector.MapObjectInspector;
 import org.apache.hadoop.hive.serde2.objectinspector.ObjectInspector;
@@ -74,6 +69,9 @@ import org.apache.hadoop.io.Writable;
 import org.apache.hive.common.util.HiveStringUtils;
 import org.apache.hive.common.util.TimestampParser;
 import org.apache.hive.hcatalog.common.HCatException;
+import org.apache.hive.hcatalog.data.DefaultHCatRecord;
+import org.apache.hive.hcatalog.data.HCatRecordObjectInspector;
+import org.apache.hive.hcatalog.data.HCatRecordObjectInspectorFactory;
 import org.apache.hive.hcatalog.data.schema.HCatFieldSchema;
 import org.apache.hive.hcatalog.data.schema.HCatFieldSchema.Type;
 import org.apache.hive.hcatalog.data.schema.HCatSchema;
@@ -89,7 +87,7 @@ import org.slf4j.LoggerFactory;
                           serdeConstants.LIST_COLUMN_TYPES,
                           serdeConstants.TIMESTAMP_FORMATS})
 
-public class JsonSerDe implements SerDe {
+public class JsonSerDe extends AbstractSerDe {
 
   private static final Logger LOG = LoggerFactory.getLogger(JsonSerDe.class);
   private List<String> columnNames;

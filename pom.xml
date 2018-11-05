@@ -10,7 +10,7 @@
 
     <groupId>com.facebook.presto.hive</groupId>
     <artifactId>hive-apache</artifactId>
-    <version>1.2.0-2</version>
+    <version>1.2.0-2-azure-blobfs-SNAPSHOT</version>
 
     <name>hive-apache</name>
     <description>Shaded version of Apache Hive for Presto</description>
@@ -34,7 +34,7 @@
         <connection>scm:git:git://github.com/facebook/presto-hive-apache.git</connection>
         <developerConnection>scm:git:git://github.com/facebook/presto-hive-apache.git</developerConnection>
         <url>https://github.com/facebook/presto-hive-apache</url>
-        <tag>1.2.0-2</tag>
+        <tag>1.2.0-2-azure-blobfs-SNAPSHOT</tag>
     </scm>
 
     <properties>
@@ -42,7 +42,7 @@
         <project.build.targetJdk>1.7</project.build.targetJdk>
         <shadeBase>com.facebook.presto.hive.\$internal</shadeBase>
         <dep.slf4j.version>1.6.6</dep.slf4j.version>
-        <dep.hive.version>1.2.0</dep.hive.version>
+        <dep.hive.version>2.3.0</dep.hive.version>
         <dep.parquet.version>1.6.0</dep.parquet.version>
     </properties>
 
@@ -512,6 +512,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>org.apache.hive</groupId>
+            <artifactId>hive-serde</artifactId>
+            <version>${dep.hive.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -749,4 +754,84 @@
             </plugins>
         </pluginManagement>
     </build>
+        <profiles>
+        <profile>
+            <id>qubole</id>
+            <properties>
+                <gpg.executable>gpg</gpg.executable>
+                <gpg.keyname>${env.GPG_KEYNAME}</gpg.keyname>
+                <gpg.passphrase>c@n0py123</gpg.passphrase>
+                <gpg.defaultKeyring>false</gpg.defaultKeyring>
+                <gpg.publicKeyring>${env.GPG_DIR}/pubring.gpg</gpg.publicKeyring>
+                <gpg.secretKeyring>${env.GPG_DIR}/secring.gpg</gpg.secretKeyring>
+            </properties>
+            <repositories>
+                <repository>
+                    <id>qubole-releases</id>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <name>libs-release</name>
+                    <url>https://qubole.jfrog.io/qubole/libs-release</url>
+                </repository>
+                <repository>
+                    <id>qubole-snapshots</id>
+                    <snapshots />
+                    <name>libs-snapshot</name>
+                    <url>https://qubole.jfrog.io/qubole/libs-snapshot</url>
+                </repository>
+                <repository>
+                    <!-- hadoop-lzo: com.hadoop.gplcompression lives here -->
+                    <id>maven-twttr</id>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <name>maven-twttr</name>
+                    <url>http://maven.twttr.com</url>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>qubole-plugin-releases</id>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <name>plugins-release</name>
+                    <url>https://qubole.jfrog.io/qubole/plugins-release</url>
+                </pluginRepository>
+                <pluginRepository>
+                    <id>qubole-plugin-snapshots</id>
+                    <snapshots />
+                    <name>plugins-snapshot</name>
+                    <url>https://qubole.jfrog.io/qubole/plugins-snapshot</url>
+                    </pluginRepository>
+                <pluginRepository>
+                    <id>qubole-releases</id>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <name>libs-release</name>
+                    <url>https://qubole.jfrog.io/qubole/libs-release</url>
+                </pluginRepository>
+                <pluginRepository>
+                    <id>qubole-snapshots</id>
+                    <snapshots />
+                    <name>libs-snapshot</name>
+                    <url>https://qubole.jfrog.io/qubole/libs-snapshot</url>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
+    <distributionManagement>
+    <repository>
+        <id>qubole-releases</id>
+        <name>releases</name>
+        <url>https://qubole.jfrog.io/qubole/libs-release-local</url>
+    </repository>
+    <snapshotRepository>
+        <id>qubole-snapshots</id>
+        <name>snapshots</name>
+        <url>https://qubole.jfrog.io/qubole/libs-snapshot-local</url>
+    </snapshotRepository>
+</distributionManagement>
 </project>
