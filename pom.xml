@@ -214,6 +214,10 @@
                     <groupId>log4j</groupId>
                     <artifactId>apache-log4j-extras</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>it.unimi.dsi</groupId>
+                    <artifactId>fastutil</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
 
@@ -361,6 +365,10 @@
                 <exclusion>
                     <groupId>stax</groupId>
                     <artifactId>stax-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>joda-time</groupId>
+                    <artifactId>joda-time</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -516,6 +524,16 @@
             <groupId>org.apache.hive</groupId>
             <artifactId>hive-serde</artifactId>
             <version>${dep.hive.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.airlift</groupId>
+                    <artifactId>aircompressor</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>joda-time</groupId>
+                    <artifactId>joda-time</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 
