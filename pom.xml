@@ -609,6 +609,7 @@
                             <artifactSet>
                                 <excludes>
                                     <exclude>org.apache.thrift:libthrift</exclude>
+                                    <exclude>org.joda.time</exclude>
                                 </excludes>
                             </artifactSet>
                             <relocations>
@@ -640,10 +641,10 @@
                                     <pattern>org.json</pattern>
                                     <shadedPattern>${shadeBase}.org.json</shadedPattern>
                                 </relocation>
-                                <relocation>
+                                <!--<relocation>
                                     <pattern>org.joda.time</pattern>
                                     <shadedPattern>${shadeBase}.org.joda.time</shadedPattern>
-                                </relocation>
+                                </relocation>-->
                                 <relocation>
                                     <pattern>au.com.bytecode.opencsv</pattern>
                                     <shadedPattern>${shadeBase}.au.com.bytecode.opencsv</shadedPattern>
@@ -658,10 +659,38 @@
                                 </relocation>
                             </relocations>
                             <filters>
-                                <filter>
+				<filter>
                                     <artifact>*:*</artifact>
                                     <excludes>
                                         <exclude>META-INF/maven/**</exclude>
+                                        <exclude>META-INF/license/**</exclude>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                        <exclude>META-INF/*.xml</exclude>
+                                        <exclude>META-INF/*.inf</exclude>
+                                        <exclude>META-INF/*.dat</exclude>
+                                        <exclude>images/**</exclude>
+                                        <exclude>org/apache/calcite/avatica/org/apache/commons/codec/language/bm/*.txt</exclude>
+                                        <exclude>webapps/static/**</exclude>
+                                        <exclude>webapps/static/jquery/themes-1.9.1/base/images/**</exclude>
+                                        <exclude>webapps/static/dt-1.9.4/images/**</exclude>
+                                        <exclude>javax/servlet/resources/**</exclude>
+                                        <exclude>javax/servlet/jsp/resources/**</exclude>
+                                        <exclude>org/eclipse/jetty/*.ico</exclude>
+                                        <exclude>org/eclipse/jetty/xml/*.dtd</exclude>
+                                        <exclude>javax/jdo/*.dtd</exclude>
+                                        <exclude>javax/jdo/*.xsd</exclude>
+                                        <exclude>about_files/**</exclude>
+                                        <exclude>*.html</exclude>
+                                        <exclude>*.xsd</exclude>
+                                        <exclude>*.jdo</exclude>
+                                        <exclude>*.dtd</exclude>
+                                        <exclude>META-INF/git.properties</exclude>
+                                        <exclude>tables/*.bin</exclude>
+                                        <exclude>templates/*.vm</exclude>
+                                        <exclude>parquet/org/codehaus/jackson/impl/*.txt</exclude>
+                                        <exclude>parquet/org/codehaus/jackson/map/*.txt</exclude>
                                     </excludes>
                                 </filter>
                                 <filter>
@@ -694,6 +723,12 @@
                                     <artifact>org.apache.hive:hive-common</artifact>
                                     <excludes>
                                         <exclude>**/*.class</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>javax.mail:mail</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/**</exclude>
                                     </excludes>
                                 </filter>
                                 <filter>
